@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>FORMS VALIDATION</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="color-change-5x">
+    <form id="contact-form">
+            <p>
+                <label for='name'>Name : </label>
+                <input type='text' name='name' id='name' placeholder="(Your name)" required maxlength='20'>
+                <span id='missName'></span>
+            </p>
+            
+
+            <p>
+                <label for='adress'>Adress : </label>
+                <input type='text' name='adress' placeholder="(Your adress)" id='adress' >
+                <span id='missAdress'></span><br>
+            </p>
+            
+            <p>
+                <label for='mail'>E-mail Adress : </label>
+                <input type='text' name='mail' id='mail' placeholder="(Your adress E-mail)">
+                <span id='missMail'></span>
+            </p>
+            <p>
+                <label for='mail'>Password : </label>
+                <input type='Password' name='password' id='password' placeholder="(Your password)">
+                <span id='missPassword'></span>
+            </p>
+            <p>
+            	<textarea name="your-message" id="your-message" placeholder="(your msg here)" class="expanding" required></textarea>
+            </p>
+
+            <p>
+                <input type='submit' value='Send' id='bouton_envoi'>
+                 <input type="reset" value='Reset' id='bouton_reset'>
+            </p>
+            
+    </form>
+
+
+
+    <script type="text/javascript">
+        let btn_envoi = document.getElementById('bouton_envoi');
+
+        let name = document.getElementById('name');
+        let missName = document.getElementById('missName');
+
+        let mail = document.getElementById('mail');
+        let missMail = document.getElementById('missMail');
+
+        let adress = document.getElementById('adress');
+        let missAdress = document.getElementById('missAdress');
+
+        let password = document.getElementById('password');
+        let missPassword = document.getElementById('missPassword');
+
+        let filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        let filterpassword =/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.*?[A-Z])(?=.{8,})/;
+
+        btn_envoi.addEventListener('click', validation);
+        function validation(event){
+            if (name.value === ''){
+                    alert("Name must be filled out");
+                    return false;
+                }
+            if (adress.value === ''){
+                    alert("Adress must be filled out");
+                    return false;
+            }
+            if (mail.value === ''){
+                    alert("E-mail must be filled out");
+                    return false;
+                }
+            if (!filter.test(mail.value)) {
+			    alert('Please provide a valid email address');
+			    mail.focus;
+			    return false;
+			 }
+			if (password.value === ''){
+                    alert("Password must be filled out");
+                    return false;
+            }
+            if (password.value.length < 7){
+            	alert('The password has less than 8 characters');
+            	return false;
+            }
+            if (!filterpassword.test(password.value)) {
+			    alert('The password must be a combination of charatacters , numbers and at least a capital letter');
+			    mail.focus;
+			    return false;
+			 }
+        }
+    </script>
+
+    
+</body>
+
+</html>
